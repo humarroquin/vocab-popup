@@ -16,6 +16,7 @@ async function getWordInfo(word) {
   return {
     partOfSpeech: meaning.partOfSpeech,
     pronunciation: phonetics.text,
+    pronunciationAudio: phonetics && phonetics.audio ? phonetics.audio : null,
   };
 }
 
@@ -49,7 +50,20 @@ document.addEventListener("mouseup", async () => {
         <strong>${selection}</strong></br>
         <em>${data.partOfSpeech}</em></br>
         Pronunciation: ${data.pronunciation || "N/A"}
+        ${
+          data.pronunciationAudio
+            ? '<button id="play-sound">🔊 Play</button>'
+            : ""
+        }
     `;
+    // Play audio when button is clicked
+    if (data.pronunciationAudio) {
+      const btn = document.getElementById("play-sound");
+      btn.addEventListener("click", () => {
+        const audio = new Audio(data.pronunciationAudio);
+        audio.play();
+      });
+    }
   } catch {
     popup.innerText = "Could not fetch definition.";
     console.error(err);
