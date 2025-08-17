@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Vocabulary Popup",
+  "version": "1.0.0",
+  "description": "Highlight a word to see its definition, pronunciation, and example sentence.",
+  "permission": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
