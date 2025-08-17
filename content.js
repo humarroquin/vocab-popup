@@ -11,7 +11,7 @@ async function getWordInfo(word) {
   // select first entry
   const entry = json[0];
   const phonetics = entry.phonetics.find((p) => p.text);
-  const meaning = entry.meaning[0];
+  const meaning = entry.meanings[0];
 
   return {
     partOfSpeech: meaning.partOfSpeech,
@@ -52,5 +52,6 @@ document.addEventListener("mouseup", async () => {
     `;
   } catch {
     popup.innerText = "Could not fetch definition.";
+    console.error(err);
   }
 });
